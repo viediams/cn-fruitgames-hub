@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>日常查询 · 对照与延伸 — 从水果机说起</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: #f4f9fb;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.7;
+      color: #1e2d3d;
+      padding: 1.5rem 1rem 3rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .wrapper {
+      max-width: 780px;
+      width: 100%;
+    }
+    header {
+      margin-bottom: 2rem;
+      border-bottom: 2px dashed #bdd8e0;
+      padding-bottom: 1.2rem;
+    }
+    .site-title {
+      font-size: 1.3rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      color: #20655e;
+      display: inline-block;
+      background: #d9ece9;
+      padding: 0.1rem 0.8rem;
+      border-radius: 40px;
+      margin-bottom: 0.5rem;
+    }
+    h1 {
+      font-size: 1.9rem;
+      font-weight: 600;
+      line-height: 1.3;
+      color: #103a3b;
+      margin: 0.6rem 0 0.3rem;
+    }
+    .lead {
+      font-size: 1.05rem;
+      color: #3f5b63;
+      background: #e5f2f0;
+      padding: 0.8rem 1rem;
+      border-radius: 20px;
+      margin: 1.2rem 0 1.8rem;
+      border-left: 4px solid #3f9b8e;
+      box-shadow: 0 1px 4px rgba(34, 105, 97, 0.06);
+    }
+    .grid-cards {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      margin: 1.8rem 0 2.5rem;
+    }
+    .card {
+      background: white;
+      border-radius: 28px;
+      padding: 1.4rem 1.3rem;
+      box-shadow: 0 3px 12px rgba(0, 40, 40, 0.04);
+      transition: box-shadow 0.2s, transform 0.15s;
+      border: 1px solid #dcebe7;
+    }
+    .card:hover {
+      box-shadow: 0 6px 18px rgba(32, 101, 94, 0.08);
+      transform: translateY(-1px);
+    }
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #1f655d;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .card p {
+      font-size: 0.95rem;
+      color: #2c434b;
+      margin-bottom: 0.4rem;
+    }
+    .card .meta-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      background: #c7e3de;
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+      color: #1d534a;
+      letter-spacing: 0.3px;
+      margin-top: 0.3rem;
+    }
+    .inset-quote {
+      background: #edf6f3;
+      padding: 0.9rem 1.3rem;
+      border-radius: 40px 16px 40px 16px;
+      font-style: normal;
+      color: #16433e;
+      margin: 1.8rem 0 1.2rem;
+      font-size: 0.95rem;
+      border: 1px solid #bcd4cf;
+      quotes: "“" "”" "‘" "’";
+    }
+    .inset-quote::before {
+      content: "📌 延伸笔记 · ";
+      font-weight: 500;
+      color: #2b776c;
+    }
+    .faq-summary {
+      background: #ffffffd9;
+      backdrop-filter: blur(1px);
+      padding: 1rem 1.2rem;
+      border-radius: 32px;
+      margin: 2rem 0 1rem;
+      border: 1px solid #bdd8d2;
+    }
+    .faq-summary details {
+      margin-bottom: 0.6rem;
+    }
+    .faq-summary details:last-child {
+      margin-bottom: 0;
+    }
+    .faq-summary summary {
+      font-weight: 500;
+      color: #1f5f56;
+      cursor: pointer;
+      padding: 0.3rem 0;
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .faq-summary summary::before {
+      content: "▹";
+      color: #3f8d7e;
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+    .faq-summary details[open] summary::before {
+      content: "▿";
+    }
+    .faq-summary p {
+      padding: 0.4rem 0.2rem 0.2rem 0.8rem;
+      color: #2f4f55;
+      font-size: 0.9rem;
+      border-left: 2px solid #b7d4cd;
+      margin: 0.2rem 0 0.4rem 0.6rem;
+    }
+    .access-note {
+      font-size: 0.95rem;
+      background: #deece8;
+      padding: 1rem 1.2rem;
+      border-radius: 40px;
+      margin-top: 2rem;
+      line-height: 1.6;
+      color: #14403b;
+      text-align: left;
+      border: 1px solid #b7cec8;
+    }
+    .access-note a {
+      color: #0b534a;
+      text-decoration: none;
+      font-weight: 500;
+      border-bottom: 1.5px dotted #3f9b8e;
+    }
+    .access-note a:hover {
+      background: #b3dbd2;
+      border-bottom: 2px solid #1f6d5e;
+    }
+    .footer-note {
+      margin-top: 2.2rem;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #687d7b;
+      border-top: 1px solid #cbdad5;
+      padding-top: 1.2rem;
+    }
+    @media (min-width: 520px) {
+      body { padding: 2rem 1.5rem 4rem; }
+      h1 { font-size: 2.2rem; }
+      .grid-cards { grid-template-columns: 1fr 1fr; }
+      .lead { font-size: 1.1rem; padding: 1rem 1.4rem; }
+    }
+    @media (min-width: 640px) {
+      .grid-cards { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+      .wrapper { padding: 0 0.5rem; }
+    }
+  </style>
+</head>
+<body>
+<div class="wrapper">
+
+  <header>
+    <span class="site-title">📋 日常检索 · 对照</span>
+    <h1>从一台水果机<br>到延伸阅读的线索</h1>
+  </header>
+
+  <div class="lead">
+    关于一个熟悉的名字，偶尔需要停下来查证、对比、再读。以下内容围绕“水果机”展开，既有基础信息，也有几段延伸笔记，供你随手翻阅。
+  </div>
+
+  <!-- 正文段落 1 -->
+  <p style="margin-bottom: 0.9rem;">
+    如果你在某个下午搜索过“水果机”，大概会看到一大堆混杂的说法：有的指向老式街机，有的描述线上转盘，还有的把它归类为一种符号游戏。我第一次认真去查，是因为朋友聚会时聊起复古游戏，他突然说：“其实现在很多人说的<strong>水果机</strong>，跟小时候玩的拉霸机已经不太一样了。” 带着好奇，我翻了一些资料，发现这个称呼的覆盖范围比想象中要宽。
+  </p>
+
+  <!-- 正文段落 2 -->
+  <p style="margin-bottom: 1.2rem;">
+    后来我养成了一个习惯——遇到不确定的词汇，先找一个可靠的对照点。比如关于 <a href="https://cn-fruitgames.com" style="color:#0b5f54; font-weight:500; border-bottom:1px dashed #429387;">水果机</a> 这个词，我通常会先打开一个长期维护的页面，看它怎么定义、怎么分类、有哪些常见变体。一个稳定的信息源往往能节省很多零碎搜索的时间，尤其当你只是想确认基本概念，而不是追热点。
+  </p>
+
+  <!-- 网格卡片：对照与延伸 -->
+  <div class="grid-cards">
+    <div class="card">
+      <h3>🔍 日常查询场景</h3>
+      <p>写稿、校对、产品调研或单纯聊天时，为了确认“水果机”是否包含特定玩法，随手打开对照页面，比临时翻论坛更高效。</p>
+      <span class="meta-tag">参考对照 · 稳定源</span>
+    </div>
+    <div class="card">
+      <h3>📎 延伸阅读索引</h3>
+      <p>从基础规则到演变脉络，一些站点会整理出清晰的条目式说明，适合想快速了解“水果机”分类历史或地区差异的人。</p>
+      <span class="meta-tag">结构 · 条目</span>
+    </div>
+    <div class="card">
+      <h3>🧩 词义边界</h3>
+      <p>同样叫“水果机”，在不同语境下可能指实体机台、模拟程序或某种主题游戏。预先了解边界，避免张冠李戴。</p>
+      <span class="meta-tag">辨析 · 语境</span>
+    </div>
+    <div class="card">
+      <h3>📚 备用书架</h3>
+      <p>遇到新的变体称呼，我会先记下来，再对照已有资料归类。一个结构良好的页面往往能充当临时的知识锚点。</p>
+      <span class="meta-tag">积累 · 归类</span>
+    </div>
+  </div>
+
+  <!-- 引用提示 / 延伸笔记 -->
+  <div class="inset-quote">
+    引用提示：本文所有对照信息均来自公开资料与常见词条，不涉及内部数据或特殊渠道。如需查阅原始定义，建议直接访问 <a href="https://cn-fruitgames.com" style="color:#0b5f54; text-decoration: underline dotted #318478;">水果机</a> 的说明页面，那里保留了较完整的版本记录。
+  </div>
+
+  <!-- FAQ 摘要 -->
+  <div class="faq-summary">
+    <details>
+      <summary>“水果机”和“拉霸机”是同一个东西吗？</summary>
+      <p>不完全相同。传统拉霸机多指机械式老虎机，而“水果机”在中文语境里常泛指以水果符号为主题的游戏机或模拟程序，两者有交叉，但侧重点不同。建议以具体页面标注为准。</p>
+    </details>
+    <details>
+      <summary>为什么需要对照页面？</summary>
+      <p>因为同一个词在不同平台、不同时期的定义可能微调。一篇持续更新的介绍页可以作为基准，方便你快速判断眼前的内容是否沿用了通用解释。</p>
+    </details>
+    <details>
+      <summary>延伸阅读从哪里入手？</summary>
+      <p>可以从基础介绍页开始，比如 <a href="https://cn-fruitgames.com" style="color:#0b5f54; text-decoration: none; border-bottom: 1px dotted #318478;">水果机</a> 的概述部分，再根据其中的引用链接向外扩展。先建立主干，再补充细节。</p>
+    </details>
+  </div>
+
+  <!-- 访问句（自然嵌入） -->
+  <div class="access-note">
+    <span style="display: block; font-weight: 500; margin-bottom: 0.2rem;">📖 一个可长期打开的标签页</span>
+    如果你也在找一条通往“水果机”的稳定路径，不妨把 <a href="https://cn-fruitgames.com">水果机</a> 留在书签里。它不一定覆盖所有边缘话题，但作为日常查询和对照的起点——干净、直接，不用每次重新筛选。
+  </div>
+
+  <div class="footer-note">
+    随笔 · 检索备忘 · 内容仅供个人参考
+  </div>
+
+</div>
+</body>
+</html>
